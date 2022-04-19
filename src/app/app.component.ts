@@ -1,10 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'angular-7-forms';
+export class AppComponent implements OnInit {
+  form: FormGroup;
+
+  constructor() {
+    this.form = new FormGroup({});
+  }
+
+  ngOnInit(): void {
+
+  }
+
+  submit() {
+    console.log('form submitted ', this.form)
+  }
 }
