@@ -4,30 +4,44 @@
 
     <div class="form-control">
       <label>Email</label>
-      <input type="text" placeholder="Email">
-      <div class="validation"></div>
+      <input type="text" placeholder="Email" formControlName="email">
+
+      <pre>{{form.get('email')!.errors | json}}</pre>
+      <div
+        *ngIf="form.get('email')!.invalid && form.get('email')!.touched"
+        class="validation">
+        <small *ngIf="form.get('email')!.errors!['required']">
+          Поле Email не може бути пустим
+        </small>
+
+        <small *ngIf="form.get('email')!.errors!['email']">
+          Введіть коректний Email
+        </small>
+      </div>
     </div>
 
     <div class="form-control">
       <label>Пароль</label>
-      <input type="password" placeholder="Пароль">
+      <input type="password" placeholder="Пароль" formControlName="password">
       <div class="validation"></div>
     </div>
 
-    <div class="card">
+    <div class="card" formGroupName="address">
       <h2>Адреса</h2>
 
       <div class="form-control">
         <label>Країна</label>
 
-        <select>
+        <select formControlName="country">
           <option value="en">English</option>
           <option value="ua">Україна</option>
         </select>
       </div>
 
       <div class="form-control">
-        <input type="text">
+        <input type="text"
+               placeholder="Місто"
+               formControlName="city">
       </div>
 
       <button class="btn" type="button">Вибрати столицю</button>
@@ -42,7 +56,7 @@
       </div>
     </div>
 
-    <button class="btn" type="submit">Відправити</button>
+    <button class="btn" type="submit" [disabled]="form.invalid">Відправити</button>
 
   </form>
 </div>
